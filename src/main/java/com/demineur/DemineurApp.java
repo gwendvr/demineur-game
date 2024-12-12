@@ -3,7 +3,6 @@ package com.demineur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class DemineurApp extends Application {
@@ -14,20 +13,18 @@ public class DemineurApp extends Application {
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
         Scene menuScene = new Scene(menuLoader.load());
 
-        // Charger le fichier FXML de la grille
-        FXMLLoader gridLoader = new FXMLLoader(getClass().getResource("main.fxml"));
-        GridPane gridRoot = gridLoader.load();  // Assurez-vous que c'est un GridPane
-        DemineurController gameController = gridLoader.getController();  // Récupérer le contrôleur du jeu
-        Scene gridScene = new Scene(gridRoot, 800, 600);
+        // Charger la grille de jeu
+        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+        Scene gameScene = new Scene(gameLoader.load());
+        DemineurController gameController = gameLoader.getController();
 
-        // Passer à la scène du menu lorsque l'application démarre
+        // Configurer le contrôleur du menu pour basculer entre les scènes
+        DemineurMenuController menuController = menuLoader.getController();
+        menuController.setGameScene(gameScene, primaryStage, gameController);
+
+        // Démarrer avec la scène du menu
         primaryStage.setScene(menuScene);
         primaryStage.setTitle("Démineur");
-
-        // Gérer les événements du menu
-        DemineurMenuController menuController = menuLoader.getController();
-        menuController.setGameScene(gridScene, primaryStage);  // Assurez-vous que vous avez cette méthode dans le contrôleur du menu
-
         primaryStage.show();
     }
 

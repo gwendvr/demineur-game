@@ -7,28 +7,45 @@ import javafx.scene.layout.GridPane;
 public class DemineurController {
 
     @FXML
-    private GridPane gridPane;  // Déclaration du GridPane
+    private GridPane gridPane;
+
+    private Game game;
 
     public void setGridSize(int rows, int columns, int numMines) {
-        // Appelez la méthode initializeGrid ici
+        game = new Game(rows, columns, numMines);
         initializeGrid(rows, columns);
     }
 
-
-    // Cette méthode est appelée pour initialiser la grille
     private void initializeGrid(int rows, int columns) {
-        if (gridPane == null) {
-            System.err.println("Le GridPane est nul !");
-            return;
-        }
-        gridPane.getChildren().clear();  // Effacer les anciennes cellules de la grille
+        gridPane.getChildren().clear();
 
-        // Créez les cellules du jeu ici (ajouter des boutons, etc.)
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
-                // Créez et ajoutez les boutons à la grille, par exemple
-                Button cell = new Button();
-                gridPane.add(cell, col, row);
+                Button cellButton = new Button();
+                cellButton.setPrefSize(30, 30);
+
+                int finalRow = row;
+                int finalCol = col;
+
+                // Ajouter un événement de clic
+                cellButton.setOnAction(event -> {
+                    game.handleClick(finalRow, finalCol);
+                    updateGrid();
+                });
+
+                gridPane.add(cellButton, col, row);
+                game.getGrille().getCellule(row, col).setButton(cellButton);
+            }
+        }
+    }
+
+    private void updateGrid() {
+        for (int row = 0; row < game.getGrille().getLargeur(); row++) {
+            for (int col = 0; col < game.getGrille().getHauteur(); col++) {
+                Cellule cell = game.getGrille().getCellule(row, col);
+                if (cell.getButton() != null && !cell.getButton().getText().isEmpty()) {
+                    cell.getButton().setDisable(true); // Désactiver les cellules déjà cliquées
+                }
             }
         }
     }

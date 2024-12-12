@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Button?>
 
 <GridPane xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="com.demineur.DemineurController"
+          fx:id="gridPane"
           hgap="5" vgap="5" alignment="CENTER"
           prefWidth="600" prefHeight="400">
-  <!-- Définir l'id fx:id pour lier ce GridPane au contrôleur -->
-  <GridPane fx:id="gridPane">
-    <!-- Ajoutez des enfants ici (par exemple, des boutons pour chaque case du jeu) -->
-  </GridPane>
-
-  <!-- Autres éléments comme les boutons ou labels -->
 </GridPane>
-
