@@ -63,14 +63,9 @@ public class Game {
         Cellule cellule = grille.getCellule(i, j);
         Button button = cellule.getButton();
 
-        // On vérifie que la cellule n'est pas déjà révélée (d'où isDisable()).
-        if (cellule.isEstDrapeau() || button.isDisable()) {
-            return; // Si la cellule est déjà marquée d'un drapeau ou révélée, ne rien faire
-        }
-
-        // Si la cellule est une mine, on permet de placer un drapeau dessus
-        if (!cellule.isEstMinee()) {
-            return; // Ne pas mettre de drapeau si ce n'est pas une mine
+        // Ne rien faire si la cellule est déjà révélée (découverte ou avec un drapeau)
+        if (button.isDisable()) {
+            return;  // Si la cellule est déjà révélée, on ne peut pas poser un drapeau
         }
 
         // Si la cellule a un drapeau, on le retire, sinon on le place
