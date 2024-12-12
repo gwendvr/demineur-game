@@ -41,6 +41,16 @@ public class Game {
         if (estTermine) return; // Ne rien faire si le jeu est déjà terminé
 
         Cellule cellule = grille.getCellule(i, j);
+        Button button = cellule.getButton();
+
+        // Si la cellule contient un drapeau, retirer le drapeau au clic gauche
+        if (cellule.isEstDrapeau()) {
+            cellule.setEstDrapeau(false);  // Retirer le drapeau
+            button.setStyle(""); // Réinitialiser le style (retirer la couleur bleue)
+            return; // Ne rien faire de plus (ne pas révéler la cellule si drapeau retiré)
+        }
+
+        // Si la cellule est une mine, la fin du jeu
         if (cellule.isEstMinee()) {
             gameOver(); // Fin de jeu si une mine est touchée
         } else {
@@ -56,6 +66,7 @@ public class Game {
         }
         checkVictory();  // Vérifier la victoire après chaque clic
     }
+
 
     public void handleRightClick(int i, int j) {
         if (estTermine) return; // Ne rien faire si le jeu est déjà terminé
