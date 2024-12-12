@@ -78,4 +78,17 @@ public class DemineurController {
         messageBox.getChildren().add(gameOverLabel); // Ajouter le message à l'interface
         messageBox.setVisible(true);  // Rendre le message visible
     }
+
+    // Affiche un message de victoire
+    public void showVictoryMessage(String message) {
+        messageBox.getChildren().clear();  // Effacer tout autre contenu
+        Label victoryLabel = new Label(message);
+        victoryLabel.setTextFill(Color.WHITE);
+
+        // Appliquer les styles ici pour un message plus grand et en gras
+        victoryLabel.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
+
+        messageBox.getChildren().add(victoryLabel);
+        messageBox.setVisible(true);  // Rendre le message visible
+    }
 }

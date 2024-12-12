@@ -56,7 +56,9 @@ public class Game {
 
         // Mettre à jour la grille après chaque clic
         gameController.updateGrid(i, j);
+        checkVictory();  // Vérifier la victoire après chaque clic
     }
+
 
     private void revealNeighbours(int i, int j) {
         // Parcourir les cellules voisines
@@ -81,13 +83,35 @@ public class Game {
         }
     }
 
-
     private void gameOver() {
         estTermine = true;
         // Vous pouvez réinitialiser le jeu ici ou proposer une option pour recommencer
     }
 
+    private void checkVictory() {
+        boolean allCellsRevealed = true;
+        for (int row = 0; row < grille.getLargeur(); row++) {
+            for (int col = 0; col < grille.getHauteur(); col++) {
+                Cellule cell = grille.getCellule(row, col);
+                Button button = cell.getButton();
+
+                // Vérifiez si la cellule n'est pas une mine et n'a pas encore été révélée
+                if (!cell.isEstMinee() && !button.isDisable()) {
+                    allCellsRevealed = false;
+                    break;
+                }
+            }
+        }
+
+        if (allCellsRevealed) {
+            // Afficher le message de victoire si toutes les cellules non-minées sont révélées
+            gameController.showVictoryMessage("Félicitations! Vous avez gagné.");
+        }
+    }
+
+
     public Grille getGrille() {
         return grille;
     }
 }
+
