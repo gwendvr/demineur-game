@@ -106,6 +106,21 @@ public class Game {
         if (allCellsRevealed) {
             // Afficher le message de victoire si toutes les cellules non-minées sont révélées
             gameController.showVictoryMessage("Félicitations! Vous avez gagné.");
+            showAvoidedMines();
+        }
+    }
+
+    private void showAvoidedMines() {
+        for (int row = 0; row < grille.getLargeur(); row++) {
+            for (int col = 0; col < grille.getHauteur(); col++) {
+                Cellule cell = grille.getCellule(row, col);
+                Button button = cell.getButton();
+
+                // Si c'est une mine et que la cellule n'a pas été révélée (non désactivée)
+                if (cell.isEstMinee() && !button.isDisable()) {
+                    button.setStyle("-fx-background-color: red;");  // Colorier la mine en rouge
+                }
+            }
         }
     }
 
