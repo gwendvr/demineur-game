@@ -6,38 +6,47 @@ import javafx.scene.layout.GridPane;
 
 public class DemineurController {
 
+    @FXML
+    private GridPane gridPane;
+
     private Game game;
 
-    @FXML
-    public void initializeGrid(GridPane gridPane) {
-        // Vérifiez que le gridPane est correctement initialisé
-        if (gridPane == null) {
-            System.out.println("Erreur : gridPane est nul");
-            return;
-        }
+    public void setGridSize(int rows, int columns, int numMines) {
+        game = new Game(rows, columns, numMines);
+        initializeGrid(rows, columns);
+    }
 
-        for (int i = 0; i < game.getGrille().getLargeur(); i++) {
-            for (int j = 0; j < game.getGrille().getHauteur(); j++) {
-                String buttonId = "button" + i + j;  // Création d'un identifiant unique pour chaque bouton
-                Button button = (Button) gridPane.lookup("#" + buttonId);
+    private void initializeGrid(int rows, int columns) {
+        gridPane.getChildren().clear();
 
-                // Vérifiez si le bouton a été trouvé
-                if (button == null) {
-                    System.out.println("Le bouton avec l'ID " + buttonId + " n'a pas été trouvé.");
-                    continue;  // Passez au bouton suivant
-                }
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                Button cellButton = new Button();
+                cellButton.setPrefSize(30, 30);
 
-                // Ajoutez l'action sur le bouton
-                final int finalI = i;
-                final int finalJ = j;
-                button.setOnAction(e -> game.handleClick(finalI, finalJ));
-                Cellule cellule = game.getGrille().getCellule(i, j);
-                cellule.setButton(button);  // Associer le bouton à la cellule
+                int finalRow = row;
+                int finalCol = col;
+
+                // Ajouter un événement de clic
+                cellButton.setOnAction(event -> {
+                    game.handleClick(finalRow, finalCol);
+                    updateGrid();
+                });
+
+                gridPane.add(cellButton, col, row);
+                game.getGrille().getCellule(row, col).setButton(cellButton);
             }
         }
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    private void updateGrid() {
+        for (int row = 0; row < game.getGrille().getLargeur(); row++) {
+            for (int col = 0; col < game.getGrille().getHauteur(); col++) {
+                Cellule cell = game.getGrille().getCellule(row, col);
+                if (cell.getButton() != null && !cell.getButton().getText().isEmpty()) {
+                    cell.getButton().setDisable(true); // Désactiver les cellules déjà cliquées
+                }
+            }
+        }
     }
 }
