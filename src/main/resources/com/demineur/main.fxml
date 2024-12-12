@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="com.demineur.DemineurController"
-          fx:id="gridPane"
-          hgap="5" vgap="5" alignment="CENTER"
-          prefWidth="600" prefHeight="400">
-</GridPane>
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.demineur.DemineurController"
+           fx:id="rootStack" alignment="CENTER">
+
+    <!-- Grille du jeu -->
+    <GridPane fx:id="gridPane" alignment="CENTER" hgap="5" vgap="5" prefWidth="600" prefHeight="400">
+        <!-- Les boutons de la grille seront ajoutés ici dans le contrôleur -->
+    </GridPane>
+
+    <!-- Bande noire et message de fin de jeu -->
+    <VBox fx:id="messageBox" alignment="CENTER" spacing="10"
+          style="-fx-background-color: rgba(0, 0, 0, 0.5);"
+          visible="false">
+        <Label fx:id="messageLabel" text="Game Over!"
+               style="-fx-text-fill: white; -fx-font-size: 24px;"/>
+    </VBox>
+
+</StackPane>

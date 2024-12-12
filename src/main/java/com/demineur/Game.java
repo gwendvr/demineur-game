@@ -1,17 +1,18 @@
 package com.demineur;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.Button;
 
 import java.util.Random;
 
 public class Game {
 
     private final Grille grille;
+    private DemineurController gameController; // Référence au contrôleur
     private boolean estTermine = false;
 
-    public Game(int largeur, int hauteur, int nombreDeMines) {
+    // Constructeur modifié pour inclure le contrôleur
+    public Game(int largeur, int hauteur, int nombreDeMines, DemineurController gameController) {
+        this.gameController = gameController;
         this.grille = new Grille(largeur, hauteur);
         placerMines(nombreDeMines);
     }
@@ -37,7 +38,7 @@ public class Game {
     }
 
     public void handleClick(int i, int j) {
-        if (estTermine) return;
+        if (estTermine) return; // Ne rien faire si le jeu est déjà terminé
 
         Cellule cellule = grille.getCellule(i, j);
         if (cellule.isEstMinee()) {
@@ -46,13 +47,44 @@ public class Game {
         } else {
             // Afficher le nombre de mines voisines
             cellule.getButton().setText(String.valueOf(cellule.getVoisinsMines()));
+
+            // Si la cellule a zéro mine voisine, on révèle ses voisins
+            if (cellule.getVoisinsMines() == 0) {
+                revealNeighbours(i, j); // Révéler les voisins si la cellule est vide
+            }
+        }
+
+        // Mettre à jour la grille après chaque clic
+        gameController.updateGrid(i, j);
+    }
+
+    private void revealNeighbours(int i, int j) {
+        // Parcourir les cellules voisines
+        for (int x = i - 1; x <= i + 1; x++) {
+            for (int y = j - 1; y <= j + 1; y++) {
+                if (x >= 0 && x < grille.getLargeur() && y >= 0 && y < grille.getHauteur()) {
+                    Cellule neighbour = grille.getCellule(x, y);
+                    Button neighbourButton = neighbour.getButton();
+
+                    // S'assurer que la cellule voisine n'est pas déjà révélée
+                    if (!neighbourButton.isDisable()) {
+                        neighbourButton.setText(String.valueOf(neighbour.getVoisinsMines()));
+                        neighbourButton.setDisable(true); // Désactiver la cellule après la révéler
+
+                        // Si cette cellule a zéro mine voisine, révéler ses voisins aussi
+                        if (neighbour.getVoisinsMines() == 0) {
+                            revealNeighbours(x, y); // Appel récursif pour révéler les voisins
+                        }
+                    }
+                }
+            }
         }
     }
 
+
     private void gameOver() {
         estTermine = true;
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Game Over!", ButtonType.OK);
-        alert.show();
+        // Vous pouvez réinitialiser le jeu ici ou proposer une option pour recommencer
     }
 
     public Grille getGrille() {
