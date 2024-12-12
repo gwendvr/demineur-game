@@ -15,10 +15,10 @@
 
     <!-- Bande noire et message de fin de jeu -->
     <VBox fx:id="messageBox" alignment="CENTER" spacing="10"
-          style="-fx-background-color: rgba(0, 0, 0, 0.5);"
+          style="-fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 15px; -fx-max-height: 200px; -fx-min-height: 100px;"
           visible="false">
         <Label fx:id="messageLabel" text="Game Over!"
-               style="-fx-text-fill: white; -fx-font-size: 24px;"/>
+               style="-fx-text-fill: white; -fx-font-size: 25px; -fx-font-weight: bold;"/>
     </VBox>
 
 </StackPane>

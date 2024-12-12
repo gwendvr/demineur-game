@@ -54,7 +54,7 @@ public class DemineurController {
         // Si une mine est détectée, colorer cette seule cellule en rouge
         if (cell.isEstMinee()) {
             button.setStyle("-fx-background-color: red;");
-            showGameOverMessage("Game Over! Vous avez perdu.");
+            showGameOverMessage("Oh non ! Vous avez perdu.");
             return; // Terminer immédiatement la mise à jour
         }
 
@@ -73,6 +73,9 @@ public class DemineurController {
         messageBox.getChildren().clear();  // Effacer tout autre contenu
         Label gameOverLabel = new Label(message);
         gameOverLabel.setTextFill(Color.WHITE);
+        gameOverLabel.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
+
         messageBox.getChildren().add(gameOverLabel); // Ajouter le message à l'interface
+        messageBox.setVisible(true);  // Rendre le message visible
     }
 }
