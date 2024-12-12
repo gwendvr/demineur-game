@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.demineur.DemineurController"
+          hgap="5" vgap="5" alignment="CENTER">
+  <children>
+    <!-- Grille de boutons pour 10x10 -->
+    <Button fx:id="button00" minWidth="30" minHeight="30" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <Button fx:id="button01" minWidth="30" minHeight="30" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    <Button fx:id="button02" minWidth="30" minHeight="30" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+    <Button fx:id="button03" minWidth="30" minHeight="30" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+    <Button fx:id="button04" minWidth="30" minHeight="30" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+    <Button fx:id="button05" minWidth="30" minHeight="30" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+    <Button fx:id="button06" minWidth="30" minHeight="30" GridPane.columnIndex="6" GridPane.rowIndex="0"/>
+    <Button fx:id="button07" minWidth="30" minHeight="30" GridPane.columnIndex="7" GridPane.rowIndex="0"/>
+    <Button fx:id="button08" minWidth="30" minHeight="30" GridPane.columnIndex="8" GridPane.rowIndex="0"/>
+    <Button fx:id="button09" minWidth="30" minHeight="30" GridPane.columnIndex="9" GridPane.rowIndex="0"/>
+
+    <Button fx:id="button10" minWidth="30" minHeight="30" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <Button fx:id="button11" minWidth="30" minHeight="30" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Button fx:id="button12" minWidth="30" minHeight="30" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+    <Button fx:id="button13" minWidth="30" minHeight="30" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+    <Button fx:id="button14" minWidth="30" minHeight="30" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+    <Button fx:id="button15" minWidth="30" minHeight="30" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
+    <Button fx:id="button16" minWidth="30" minHeight="30" GridPane.columnIndex="6" GridPane.rowIndex="1"/>
+    <Button fx:id="button17" minWidth="30" minHeight="30" GridPane.columnIndex="7" GridPane.rowIndex="1"/>
+    <Button fx:id="button18" minWidth="30" minHeight="30" GridPane.columnIndex="8" GridPane.rowIndex="1"/>
+    <Button fx:id="button19" minWidth="30" minHeight="30" GridPane.columnIndex="9" GridPane.rowIndex="1"/>
+
+    <Button fx:id="button20" minWidth="30" minHeight="30" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <Button fx:id="button21" minWidth="30" minHeight="30" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Button fx:id="button22" minWidth="30" minHeight="30" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+    <Button fx:id="button23" minWidth="30" minHeight="30" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+    <Button fx:id="button24" minWidth="30" minHeight="30" GridPane.columnIndex="4" GridPane.rowIndex="2"/>
+    <Button fx:id="button25" minWidth="30" minHeight="30" GridPane.columnIndex="5" GridPane.rowIndex="2"/>
+    <Button fx:id="button26" minWidth="30" minHeight="30" GridPane.columnIndex="6" GridPane.rowIndex="2"/>
+    <Button fx:id="button27" minWidth="30" minHeight="30" GridPane.columnIndex="7" GridPane.rowIndex="2"/>
+    <Button fx:id="button28" minWidth="30" minHeight="30" GridPane.columnIndex="8" GridPane.rowIndex="2"/>
+    <Button fx:id="button29" minWidth="30" minHeight="30" GridPane.columnIndex="9" GridPane.rowIndex="2"/>
+
+    <Button fx:id="button30" minWidth="30" minHeight="30" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <Button fx:id="button31" minWidth="30" minHeight="30" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <Button fx:id="button32" minWidth="30" minHeight="30" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+    <Button fx:id="button33" minWidth="30" minHeight="30" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+    <Button fx:id="button34" minWidth="30" minHeight="30" GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+    <Button fx:id="button35" minWidth="30" minHeight="30" GridPane.columnIndex="5" GridPane.rowIndex="3"/>
+    <Button fx:id="button36" minWidth="30" minHeight="30" GridPane.columnIndex="6" GridPane.rowIndex="3"/>
+    <Button fx:id="button37" minWidth="30" minHeight="30" GridPane.columnIndex="7" GridPane.rowIndex="3"/>
+    <Button fx:id="button38" minWidth="30" minHeight="30" GridPane.columnIndex="8" GridPane.rowIndex="3"/>
+    <Button fx:id="button39" minWidth="30" minHeight="30" GridPane.columnIndex="9" GridPane.rowIndex="3"/>
+
+    <Button fx:id="button40" minWidth="30" minHeight="30" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <Button fx:id="button41" minWidth="30" minHeight="30" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+    <Button fx:id="button42" minWidth="30" minHeight="30" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+    <Button fx:id="button43" minWidth="30" minHeight="30" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+    <Button fx:id="button44" minWidth="30" minHeight="30" GridPane.columnIndex="4" GridPane.rowIndex="4"/>
+    <Button fx:id="button45" minWidth="30" minHeight="30" GridPane.columnIndex="5" GridPane.rowIndex="4"/>
+    <Button fx:id="button46" minWidth="30" minHeight="30" GridPane.columnIndex="6" GridPane.rowIndex="4"/>
+    <Button fx:id="button47" minWidth="30" minHeight="30" GridPane.columnIndex="7" GridPane.rowIndex="4"/>
+    <Button fx:id="button48" minWidth="30" minHeight="30" GridPane.columnIndex="8" GridPane.rowIndex="4"/>
+    <Button fx:id="button49" minWidth="30" minHeight="30" GridPane.columnIndex="9" GridPane.rowIndex="4"/>
+
+    <Button fx:id="button50" minWidth="30" minHeight="30" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <Button fx:id="button51" minWidth="30" minHeight="30" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    <Button fx:id="button52" minWidth="30" minHeight="30" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+    <Button fx:id="button53" minWidth="30" minHeight="30" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+    <Button fx:id="button54" minWidth="30" minHeight="30" GridPane.columnIndex="4" GridPane.rowIndex="5"/>
+    <Button fx:id="button55" minWidth="30" minHeight="30" GridPane.columnIndex="5" GridPane.rowIndex="5"/>
+    <Button fx:id="button56" minWidth="30" minHeight="30" GridPane.columnIndex="6" GridPane.rowIndex="5"/>
+    <Button fx:id="button57" minWidth="30" minHeight="30" GridPane.columnIndex="7" GridPane.rowIndex="5"/>
+    <Button fx:id="button58" minWidth="30" minHeight="30" GridPane.columnIndex="8" GridPane.rowIndex="5"/>
+    <Button fx:id="button59" minWidth="30" minHeight="30" GridPane.columnIndex="9" GridPane.rowIndex="5"/>
+
+    <Button fx:id="button60" minWidth="30" minHeight="30" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <Button fx:id="button61" minWidth="30" minHeight="30" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+    <Button fx:id="button62" minWidth="30" minHeight="30" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+    <Button fx:id="button63" minWidth="30" minHeight="30" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+    <Button fx:id="button64" minWidth="30" minHeight="30" GridPane.columnIndex="4" GridPane.rowIndex="6"/>
+    <Button fx:id="button65" minWidth="30" minHeight="30" GridPane.columnIndex="5" GridPane.rowIndex="6"/>
+    <Button fx:id="button66" minWidth="30" minHeight="30" GridPane.columnIndex="6" GridPane.rowIndex="6"/>
+    <Button fx:id="button67" minWidth="30" minHeight="30" GridPane.columnIndex="7" GridPane.rowIndex="6"/>
+    <Button fx:id="button68" minWidth="30" minHeight="30" GridPane.columnIndex="8" GridPane.rowIndex="6"/>
+    <Button fx:id="button69" minWidth="30" minHeight="30" GridPane.columnIndex="9" GridPane.rowIndex="6"/>
+
+    <Button fx:id="button70" minWidth="30" minHeight="30" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+    <Button fx:id="button71" minWidth="30" minHeight="30" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+    <Button fx:id="button72" minWidth="30" minHeight="30" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+    <Button fx:id="button73" minWidth="30" minHeight="30" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+    <Button fx:id="button74" minWidth="30" minHeight="30" GridPane.columnIndex="4" GridPane.rowIndex="7"/>
+    <Button fx:id="button75" minWidth="30" minHeight="30" GridPane.columnIndex="5" GridPane.rowIndex="7"/>
+    <Button fx:id="button76" minWidth="30" minHeight="30" GridPane.columnIndex="6" GridPane.rowIndex="7"/>
+    <Button fx:id="button77" minWidth="30" minHeight="30" GridPane.columnIndex="7" GridPane.rowIndex="7"/>
+    <Button fx:id="button78" minWidth="30" minHeight="30" GridPane.columnIndex="8" GridPane.rowIndex="7"/>
+    <Button fx:id="button79" minWidth="30" minHeight="30" GridPane.columnIndex="9" GridPane.rowIndex="7"/>
+
+    <Button fx:id="button80" minWidth="30" minHeight="30" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+    <Button fx:id="button81" minWidth="30" minHeight="30" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+    <Button fx:id="button82" minWidth="30" minHeight="30" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
+    <Button fx:id="button83" minWidth="30" minHeight="30" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
+    <Button fx:id="button84" minWidth="30" minHeight="30" GridPane.columnIndex="4" GridPane.rowIndex="8"/>
+    <Button fx:id="button85" minWidth="30" minHeight="30" GridPane.columnIndex="5" GridPane.rowIndex="8"/>
+    <Button fx:id="button86" minWidth="30" minHeight="30" GridPane.columnIndex="6" GridPane.rowIndex="8"/>
+    <Button fx:id="button87" minWidth="30" minHeight="30" GridPane.columnIndex="7" GridPane.rowIndex="8"/>
+    <Button fx:id="button88" minWidth="30" minHeight="30" GridPane.columnIndex="8" GridPane.rowIndex="8"/>
+    <Button fx:id="button89" minWidth="30" minHeight="30" GridPane.columnIndex="9" GridPane.rowIndex="8"/>
+
+    <Button fx:id="button90" minWidth="30" minHeight="30" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+    <Button fx:id="button91" minWidth="30" minHeight="30" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+    <Button fx:id="button92" minWidth="30" minHeight="30" GridPane.columnIndex="2" GridPane.rowIndex="9"/>
+    <Button fx:id="button93" minWidth="30" minHeight="30" GridPane.columnIndex="3" GridPane.rowIndex="9"/>
+    <Button fx:id="button94" minWidth="30" minHeight="30" GridPane.columnIndex="4" GridPane.rowIndex="9"/>
+    <Button fx:id="button95" minWidth="30" minHeight="30" GridPane.columnIndex="5" GridPane.rowIndex="9"/>
+    <Button fx:id="button96" minWidth="30" minHeight="30" GridPane.columnIndex="6" GridPane.rowIndex="9"/>
+    <Button fx:id="button97" minWidth="30" minHeight="30" GridPane.columnIndex="7" GridPane.rowIndex="9"/>
+    <Button fx:id="button98" minWidth="30" minHeight="30" GridPane.columnIndex="8" GridPane.rowIndex="9"/>
+    <Button fx:id="button99" minWidth="30" minHeight="30" GridPane.columnIndex="9" GridPane.rowIndex="9"/>
+  </children>
+</GridPane>
