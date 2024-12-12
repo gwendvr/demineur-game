@@ -2,6 +2,7 @@ package com.demineur;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
@@ -35,9 +36,15 @@ public class DemineurController {
                 int finalRow = row;
                 int finalCol = col;
 
-                // Ajouter un événement de clic sur chaque bouton
-                cellButton.setOnAction(event -> {
-                    game.handleClick(finalRow, finalCol);
+                // Ajouter un gestionnaire d'événements pour le clic droit et gauche
+                cellButton.setOnMouseClicked(event -> {
+                    if (!cellButton.isDisable()) { // On vérifie si la cellule est toujours active (pas révélée)
+                        if (event.getButton() == MouseButton.SECONDARY) { // Clic droit
+                            game.handleRightClick(finalRow, finalCol); // Appel d'une méthode pour gérer le clic droit
+                        } else if (event.getButton() == MouseButton.PRIMARY) {
+                            game.handleClick(finalRow, finalCol); // Clic gauche pour gérer la cellule normalement
+                        }
+                    }
                 });
 
                 gridPane.add(cellButton, col, row);
@@ -45,6 +52,7 @@ public class DemineurController {
             }
         }
     }
+
 
     // Met à jour la grille après chaque clic
     public void updateGrid(int row, int col) {
@@ -65,7 +73,10 @@ public class DemineurController {
             button.setText(""); // Afficher rien si aucune mine voisine
         }
 
-        button.setDisable(true); // Désactiver le bouton après un clic
+        // Désactiver le bouton uniquement si ce n'est pas un drapeau
+        if (!cell.isEstDrapeau() && !cell.isEstMinee()) {
+            button.setDisable(true); // Désactiver le bouton après un clic gauche seulement si ce n'est pas une mine
+        }
     }
 
     // Affiche un message de fin de jeu

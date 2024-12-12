@@ -42,23 +42,46 @@ public class Game {
 
         Cellule cellule = grille.getCellule(i, j);
         if (cellule.isEstMinee()) {
-            // Fin de jeu si une mine est touchée
-            gameOver();
+            gameOver(); // Fin de jeu si une mine est touchée
         } else {
-            // Afficher le nombre de mines voisines
-            cellule.getButton().setText(String.valueOf(cellule.getVoisinsMines()));
-
-            // Si la cellule a zéro mine voisine, on révèle ses voisins
+            cellule.getButton().setText(String.valueOf(cellule.getVoisinsMines())); // Afficher le nombre de mines voisines
             if (cellule.getVoisinsMines() == 0) {
                 revealNeighbours(i, j); // Révéler les voisins si la cellule est vide
             }
         }
 
-        // Mettre à jour la grille après chaque clic
-        gameController.updateGrid(i, j);
+        // Ne désactivez le bouton que si ce n'est pas un drapeau
+        if (!cellule.isEstDrapeau()) {
+            gameController.updateGrid(i, j); // Mise à jour de la grille après chaque clic
+        }
         checkVictory();  // Vérifier la victoire après chaque clic
     }
 
+    public void handleRightClick(int i, int j) {
+        if (estTermine) return; // Ne rien faire si le jeu est déjà terminé
+
+        Cellule cellule = grille.getCellule(i, j);
+        Button button = cellule.getButton();
+
+        // On vérifie que la cellule n'est pas déjà révélée (d'où isDisable()).
+        if (cellule.isEstDrapeau() || button.isDisable()) {
+            return; // Si la cellule est déjà marquée d'un drapeau ou révélée, ne rien faire
+        }
+
+        // Si la cellule est une mine, on permet de placer un drapeau dessus
+        if (!cellule.isEstMinee()) {
+            return; // Ne pas mettre de drapeau si ce n'est pas une mine
+        }
+
+        // Si la cellule a un drapeau, on le retire, sinon on le place
+        if (cellule.isEstDrapeau()) {
+            cellule.setEstDrapeau(false);  // Retirer le drapeau
+            button.setStyle(""); // Réinitialiser le style
+        } else {
+            cellule.setEstDrapeau(true);   // Placer le drapeau
+            button.setStyle("-fx-background-color: blue;"); // Colorier la cellule en bleu
+        }
+    }
 
     private void revealNeighbours(int i, int j) {
         // Parcourir les cellules voisines
@@ -124,9 +147,7 @@ public class Game {
         }
     }
 
-
     public Grille getGrille() {
         return grille;
     }
 }
-

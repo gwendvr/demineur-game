@@ -9,6 +9,15 @@ public class Cellule {
     private boolean estMinee;
     private int voisinsMines;
     private Button button;
+    private boolean estDrapeau = false;
+
+    public boolean isEstDrapeau() {
+        return estDrapeau;
+    }
+
+    public void setEstDrapeau(boolean estDrapeau) {
+        this.estDrapeau = estDrapeau;
+    }
 
     public Cellule(int x, int y) {
         this.x = x;
