@@ -20,6 +20,13 @@ public class DemineurApp extends Application {
         StackPane gameRoot = gameLoader.load(); // L'élément racine est StackPane, ce qui est correct ici
         DemineurController gameController = gameLoader.getController();
 
+        if (gameController == null) {
+            System.err.println("Erreur : gameController est null à l'initialisation !");
+            return;
+        }
+
+        gameController.setStage(primaryStage);
+
         // Créer une scène pour le menu
         Scene mainScene = new Scene(menuRoot, 800, 600);
 

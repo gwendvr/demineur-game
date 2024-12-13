@@ -1,9 +1,13 @@
 package com.demineur;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class DemineurMenuController {
 
@@ -15,6 +19,21 @@ public class DemineurMenuController {
         this.stage = primaryStage;
         this.gameRoot = gameRoot;
         this.gameController = gameController;
+
+        gameController.setStage(primaryStage);
+    }
+
+    public void handleBackToMenu(Stage stage) {
+        try {
+            // Charger la scène du menu (menu.fxml)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+            VBox root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

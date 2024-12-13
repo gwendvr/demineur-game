@@ -2,7 +2,6 @@ package com.demineur;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
@@ -10,6 +9,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class DemineurController {
 
@@ -23,6 +24,12 @@ public class DemineurController {
     private Button buttonRetourMenu;
 
     private Game game;
+
+    private Stage stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     // Cette méthode est appelée pour initialiser la grille du jeu
     public void setGridSize(int rows, int columns, int numMines) {
@@ -59,6 +66,21 @@ public class DemineurController {
         }
     }
 
+    @FXML
+    private void handleBackToMenu() {
+        try {
+            // Charger la scène du menu
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+            VBox root = loader.load();
+
+            // Utiliser la stage directement
+            DemineurMenuController menuController = loader.getController();
+            menuController.handleBackToMenu(stage);  // Passer la stage à MenuController
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Met à jour la grille après chaque clic
     public void updateGrid(int row, int col) {
@@ -85,35 +107,20 @@ public class DemineurController {
         }
     }
 
-    @FXML
-    private void handleBackToMenu() {
-        // Charger le menu
-        try {
-            FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
-            VBox menuRoot = menuLoader.load();
-
-            // Revenir au menu principal
-            Scene menuScene = new Scene(menuRoot, 800, 600);
-            Stage currentStage = (Stage) gridPane.getScene().getWindow(); // Récupérer la fenêtre actuelle
-            currentStage.setScene(menuScene);  // Passer à la scène du menu
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     // Affiche un message de fin de jeu
     public void showGameOverMessage(String message) {
         messageBox.getChildren().clear();
         Label gameOverLabel = new Label(message);
         gameOverLabel.setTextFill(Color.WHITE);
         gameOverLabel.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
-
         messageBox.getChildren().add(gameOverLabel);
+
+        // Rendre le VBox visible
         messageBox.setVisible(true);
 
+        // Créer et ajouter le bouton
         Button buttonRetourMenu = new Button("Retour au Menu");
         buttonRetourMenu.setOnAction(event -> handleBackToMenu());
-
         messageBox.getChildren().add(buttonRetourMenu);
     }
 
@@ -125,13 +132,14 @@ public class DemineurController {
 
         // Appliquer les styles ici pour un message plus grand et en gras
         victoryLabel.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
-
         messageBox.getChildren().add(victoryLabel);
+
+        // Rendre le VBox visible
         messageBox.setVisible(true);
 
+        // Créer et ajouter le bouton
         Button buttonRetourMenu = new Button("Retour au Menu");
         buttonRetourMenu.setOnAction(event -> handleBackToMenu());
-
         messageBox.getChildren().add(buttonRetourMenu);
     }
 
