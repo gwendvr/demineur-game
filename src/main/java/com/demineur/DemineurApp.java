@@ -3,6 +3,8 @@ package com.demineur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class DemineurApp extends Application {
@@ -11,20 +13,27 @@ public class DemineurApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         // Charger le menu
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
-        Scene menuScene = new Scene(menuLoader.load());
+        VBox menuRoot = menuLoader.load();
 
-        // Charger la grille de jeu
+        // Charger la scène de jeu avec GridPane (plutôt que StackPane)
         FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("main.fxml"));
-        Scene gameScene = new Scene(gameLoader.load());
+        StackPane gameRoot = gameLoader.load(); // L'élément racine est StackPane, ce qui est correct ici
         DemineurController gameController = gameLoader.getController();
 
-        // Configurer le contrôleur du menu pour basculer entre les scènes
-        DemineurMenuController menuController = menuLoader.getController();
-        menuController.setGameScene(gameScene, primaryStage, gameController);
+        // Créer une scène pour le menu
+        Scene mainScene = new Scene(menuRoot, 800, 600);
 
-        // Démarrer avec la scène du menu
-        primaryStage.setScene(menuScene);
+        // Configurer l'application pour passer au jeu à partir du menu
+        DemineurMenuController menuController = menuLoader.getController();
+        menuController.setGameRoot(gameRoot, primaryStage, gameController);  // Corrigé le paramètre
+
+        // Afficher la scène du menu
+        primaryStage.setScene(mainScene);
         primaryStage.setTitle("Démineur");
+
+        // Configurer l'application en plein écran
+        primaryStage.setFullScreen(true);
+
         primaryStage.show();
     }
 
