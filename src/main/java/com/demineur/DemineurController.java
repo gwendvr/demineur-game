@@ -119,10 +119,8 @@ public class DemineurController {
         gameOverLabel.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
         messageBox.getChildren().add(gameOverLabel);
 
-        // Rendre le VBox visible
         messageBox.setVisible(true);
 
-        // Créer et ajouter le bouton
         Button buttonRetourMenu = new Button("Retour au Menu");
         buttonRetourMenu.setOnAction(event -> handleBackToMenu());
         messageBox.getChildren().add(buttonRetourMenu);
@@ -134,14 +132,11 @@ public class DemineurController {
         Label victoryLabel = new Label(message);
         victoryLabel.setTextFill(Color.WHITE);
 
-        // Appliquer les styles ici pour un message plus grand et en gras
         victoryLabel.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
         messageBox.getChildren().add(victoryLabel);
 
-        // Rendre le VBox visible
         messageBox.setVisible(true);
 
-        // Créer et ajouter le bouton
         Button buttonRetourMenu = new Button("Retour au Menu");
         buttonRetourMenu.setOnAction(event -> handleBackToMenu());
         messageBox.getChildren().add(buttonRetourMenu);

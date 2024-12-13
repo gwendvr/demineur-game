@@ -29,7 +29,6 @@ public class Game {
                 grille.getCellule(i, j).setEstMinee(true);
                 minesPlacees++;
 
-                // Mise à jour des voisins
                 for (Cellule celluleVoisine : grille.getVoisines(i, j)) {
                     celluleVoisine.setVoisinsMines(celluleVoisine.getVoisinsMines() + 1);
                 }
@@ -38,54 +37,53 @@ public class Game {
     }
 
     public void handleClick(int i, int j) {
-        if (estTermine) return; // Ne rien faire si le jeu est déjà terminé
+        if (estTermine) return;
 
         Cellule cellule = grille.getCellule(i, j);
         Button button = cellule.getButton();
 
         // Si la cellule contient un drapeau, retirer le drapeau au clic gauche
         if (cellule.isEstDrapeau()) {
-            cellule.setEstDrapeau(false);  // Retirer le drapeau
-            button.setStyle(""); // Réinitialiser le style (retirer la couleur bleue)
-            return; // Ne rien faire de plus (ne pas révéler la cellule si drapeau retiré)
+            cellule.setEstDrapeau(false);
+            button.setStyle("");
+            return;
         }
 
         // Si la cellule est une mine, la fin du jeu
         if (cellule.isEstMinee()) {
-            gameOver(); // Fin de jeu si une mine est touchée
+            gameOver();
         } else {
-            cellule.getButton().setText(String.valueOf(cellule.getVoisinsMines())); // Afficher le nombre de mines voisines
+            cellule.getButton().setText(String.valueOf(cellule.getVoisinsMines()));
             if (cellule.getVoisinsMines() == 0) {
-                revealNeighbours(i, j); // Révéler les voisins si la cellule est vide
+                revealNeighbours(i, j);
             }
         }
 
         // Ne désactivez le bouton que si ce n'est pas un drapeau
         if (!cellule.isEstDrapeau()) {
-            gameController.updateGrid(i, j); // Mise à jour de la grille après chaque clic
+            gameController.updateGrid(i, j);
         }
-        checkVictory();  // Vérifier la victoire après chaque clic
+        checkVictory();
     }
 
 
     public void handleRightClick(int i, int j) {
-        if (estTermine) return; // Ne rien faire si le jeu est déjà terminé
+        if (estTermine) return;
 
         Cellule cellule = grille.getCellule(i, j);
         Button button = cellule.getButton();
 
-        // Ne rien faire si la cellule est déjà révélée (découverte ou avec un drapeau)
         if (button.isDisable()) {
-            return;  // Si la cellule est déjà révélée, on ne peut pas poser un drapeau
+            return;
         }
 
         // Si la cellule a un drapeau, on le retire, sinon on le place
         if (cellule.isEstDrapeau()) {
-            cellule.setEstDrapeau(false);  // Retirer le drapeau
-            button.setStyle(""); // Réinitialiser le style
+            cellule.setEstDrapeau(false);
+            button.setStyle("");
         } else {
-            cellule.setEstDrapeau(true);   // Placer le drapeau
-            button.setStyle("-fx-background-color: blue;"); // Colorier la cellule en bleu
+            cellule.setEstDrapeau(true);
+            button.setStyle("-fx-background-color: blue;");
         }
     }
 
@@ -100,11 +98,11 @@ public class Game {
                     // S'assurer que la cellule voisine n'est pas déjà révélée
                     if (!neighbourButton.isDisable()) {
                         neighbourButton.setText(String.valueOf(neighbour.getVoisinsMines()));
-                        neighbourButton.setDisable(true); // Désactiver la cellule après la révéler
+                        neighbourButton.setDisable(true);
 
-                        // Si cette cellule a zéro mine voisine, révéler ses voisins aussi
+                        // révéler ses voisins aussi si 0
                         if (neighbour.getVoisinsMines() == 0) {
-                            revealNeighbours(x, y); // Appel récursif pour révéler les voisins
+                            revealNeighbours(x, y);
                         }
                     }
                 }
@@ -114,7 +112,6 @@ public class Game {
 
     private void gameOver() {
         estTermine = true;
-        // Vous pouvez réinitialiser le jeu ici ou proposer une option pour recommencer
     }
 
     private void checkVictory() {
@@ -133,7 +130,6 @@ public class Game {
         }
 
         if (allCellsRevealed) {
-            // Afficher le message de victoire si toutes les cellules non-minées sont révélées
             gameController.showVictoryMessage("Félicitations! Vous avez gagné.");
             showAvoidedMines();
         }
@@ -145,9 +141,8 @@ public class Game {
                 Cellule cell = grille.getCellule(row, col);
                 Button button = cell.getButton();
 
-                // Si c'est une mine et que la cellule n'a pas été révélée (non désactivée)
                 if (cell.isEstMinee() && !button.isDisable()) {
-                    button.setStyle("-fx-background-color: red;");  // Colorier la mine en rouge
+                    button.setStyle("-fx-background-color: red;");
                 }
             }
         }

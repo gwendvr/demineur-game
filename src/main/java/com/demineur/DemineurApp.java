@@ -15,7 +15,7 @@ public class DemineurApp extends Application {
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
         VBox menuRoot = menuLoader.load();
 
-        // Charger la scène de jeu avec StackPane (plutôt que GridPane)
+        // Charger la scène de jeu
         FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("main.fxml"));
         StackPane gameRoot = gameLoader.load();
         DemineurController gameController = gameLoader.getController();
@@ -26,10 +26,8 @@ public class DemineurApp extends Application {
             return;
         }
 
-        // Passer le Stage au contrôleur de jeu
         gameController.setStage(primaryStage);
 
-        // Créer une scène pour le menu
         Scene mainScene = new Scene(menuRoot, 800, 600);
 
         // Passer le root du jeu et le stage au contrôleur du menu
