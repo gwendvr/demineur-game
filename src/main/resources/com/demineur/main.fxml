@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
 
+<?import javafx.scene.control.Button?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="com.demineur.DemineurController"
            fx:id="rootStack" alignment="CENTER">
@@ -19,6 +20,7 @@
           visible="false">
         <Label fx:id="messageLabel" text="Game Over!"
                style="-fx-text-fill: white; -fx-font-size: 25px; -fx-font-weight: bold;"/>
+        <Button fx:id="buttonRetourMenu" text="Retour au Menu" onAction="#handleBackToMenu" visible="false"/>
     </VBox>
 
 </StackPane>
