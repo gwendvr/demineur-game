@@ -37,7 +37,7 @@ public class DemineurMenuController {
 
     private void startGame(int largeur, int hauteur, int nombreDeMines) {
         if (gameController != null) {
-            gameController.setGridSize(largeur, hauteur, nombreDeMines);
+            gameController.setGridSize(largeur, hauteur, nombreDeMines);  // Assurez-vous que cette méthode est bien définie
             Scene gameScene = new Scene(gameRoot, 800, 600);
             stage.setScene(gameScene);  // Passe à la scène de jeu
         } else {

@@ -25,7 +25,7 @@ public class DemineurApp extends Application {
 
         // Configurer l'application pour passer au jeu à partir du menu
         DemineurMenuController menuController = menuLoader.getController();
-        menuController.setGameRoot(gameRoot, mainScene, primaryStage, gameController);
+        menuController.setGameRoot(gameRoot, primaryStage, gameController);  // Corrigé le paramètre
 
         // Afficher la scène du menu
         primaryStage.setScene(mainScene);
