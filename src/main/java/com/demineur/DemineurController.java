@@ -1,12 +1,15 @@
 package com.demineur;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 public class DemineurController {
 
@@ -14,7 +17,10 @@ public class DemineurController {
     private GridPane gridPane;
 
     @FXML
-    private VBox messageBox;  // Pour afficher le message
+    private VBox messageBox;
+
+    @FXML
+    private Button buttonRetourMenu;
 
     private Game game;
 
@@ -79,20 +85,41 @@ public class DemineurController {
         }
     }
 
+    @FXML
+    private void handleBackToMenu() {
+        // Charger le menu
+        try {
+            FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+            VBox menuRoot = menuLoader.load();
+
+            // Revenir au menu principal
+            Scene menuScene = new Scene(menuRoot, 800, 600);
+            Stage currentStage = (Stage) gridPane.getScene().getWindow(); // Récupérer la fenêtre actuelle
+            currentStage.setScene(menuScene);  // Passer à la scène du menu
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // Affiche un message de fin de jeu
     public void showGameOverMessage(String message) {
-        messageBox.getChildren().clear();  // Effacer tout autre contenu
+        messageBox.getChildren().clear();
         Label gameOverLabel = new Label(message);
         gameOverLabel.setTextFill(Color.WHITE);
         gameOverLabel.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
 
-        messageBox.getChildren().add(gameOverLabel); // Ajouter le message à l'interface
-        messageBox.setVisible(true);  // Rendre le message visible
+        messageBox.getChildren().add(gameOverLabel);
+        messageBox.setVisible(true);
+
+        Button buttonRetourMenu = new Button("Retour au Menu");
+        buttonRetourMenu.setOnAction(event -> handleBackToMenu());
+
+        messageBox.getChildren().add(buttonRetourMenu);
     }
 
     // Affiche un message de victoire
     public void showVictoryMessage(String message) {
-        messageBox.getChildren().clear();  // Effacer tout autre contenu
+        messageBox.getChildren().clear();
         Label victoryLabel = new Label(message);
         victoryLabel.setTextFill(Color.WHITE);
 
@@ -100,6 +127,12 @@ public class DemineurController {
         victoryLabel.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
 
         messageBox.getChildren().add(victoryLabel);
-        messageBox.setVisible(true);  // Rendre le message visible
+        messageBox.setVisible(true);
+
+        Button buttonRetourMenu = new Button("Retour au Menu");
+        buttonRetourMenu.setOnAction(event -> handleBackToMenu());
+
+        messageBox.getChildren().add(buttonRetourMenu);
     }
+
 }
