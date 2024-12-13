@@ -2,6 +2,7 @@ package com.demineur;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
@@ -20,9 +21,6 @@ public class DemineurController {
     @FXML
     private VBox messageBox;
 
-    @FXML
-    private Button buttonRetourMenu;
-
     private Game game;
 
     private Stage stage;
@@ -33,13 +31,13 @@ public class DemineurController {
 
     // Cette méthode est appelée pour initialiser la grille du jeu
     public void setGridSize(int rows, int columns, int numMines) {
-        game = new Game(rows, columns, numMines, this); // Passer "this" comme contrôleur
+        game = new Game(rows, columns, numMines, this);
         initializeGrid(rows, columns);
     }
 
     // Cette méthode crée et initialise les boutons de la grille
     private void initializeGrid(int rows, int columns) {
-        gridPane.getChildren().clear(); // On efface la grille précédente
+        gridPane.getChildren().clear();
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
@@ -51,11 +49,11 @@ public class DemineurController {
 
                 // Ajouter un gestionnaire d'événements pour le clic droit et gauche
                 cellButton.setOnMouseClicked(event -> {
-                    if (!cellButton.isDisable()) { // On vérifie si la cellule est toujours active (pas révélée)
-                        if (event.getButton() == MouseButton.SECONDARY) { // Clic droit
-                            game.handleRightClick(finalRow, finalCol); // Appel d'une méthode pour gérer le clic droit
+                    if (!cellButton.isDisable()) {
+                        if (event.getButton() == MouseButton.SECONDARY) {
+                            game.handleRightClick(finalRow, finalCol);
                         } else if (event.getButton() == MouseButton.PRIMARY) {
-                            game.handleClick(finalRow, finalCol); // Clic gauche pour gérer la cellule normalement
+                            game.handleClick(finalRow, finalCol);
                         }
                     }
                 });
@@ -70,13 +68,19 @@ public class DemineurController {
     private void handleBackToMenu() {
         try {
             // Charger la scène du menu
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-            VBox root = loader.load();
+            FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+            VBox menuRoot = menuLoader.load();
 
-            // Utiliser la stage directement
-            DemineurMenuController menuController = loader.getController();
-            menuController.handleBackToMenu(stage);  // Passer la stage à MenuController
+            // Obtenez le contrôleur du menu
+            DemineurMenuController menuController = menuLoader.getController();
+            menuController.setStage(stage);
 
+            // Passer à la scène du menu
+            Scene menuScene = new Scene(menuRoot, 800, 600);
+            stage.setScene(menuScene);
+
+            // Afficher la scène du menu
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,23 +91,23 @@ public class DemineurController {
         Cellule cell = game.getGrille().getCellule(row, col);
         Button button = cell.getButton();
 
-        // Si une mine est détectée, colorer cette seule cellule en rouge
+        // Si une mine est détectée
         if (cell.isEstMinee()) {
             button.setStyle("-fx-background-color: red;");
             showGameOverMessage("Oh non ! Vous avez perdu.");
-            return; // Terminer immédiatement la mise à jour
+            return;
         }
 
         // Afficher le nombre de mines voisines
         if (cell.getVoisinsMines() > 0) {
             button.setText(String.valueOf(cell.getVoisinsMines()));
         } else {
-            button.setText(""); // Afficher rien si aucune mine voisine
+            button.setText("");
         }
 
         // Désactiver le bouton uniquement si ce n'est pas un drapeau
         if (!cell.isEstDrapeau() && !cell.isEstMinee()) {
-            button.setDisable(true); // Désactiver le bouton après un clic gauche seulement si ce n'est pas une mine
+            button.setDisable(true);
         }
     }
 

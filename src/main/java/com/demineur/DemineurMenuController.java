@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,25 +14,20 @@ public class DemineurMenuController {
     private DemineurController gameController;
     private StackPane gameRoot;
 
+    // Méthode pour initialiser le stage dans le contrôleur
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    // Méthode pour initialiser la racine de la scène du jeu, le stage et le contrôleur du jeu
     public void setGameRoot(StackPane gameRoot, Stage primaryStage, DemineurController gameController) {
+        System.out.println("Débogage : Stage avant affectation : " + primaryStage);
         this.stage = primaryStage;
         this.gameRoot = gameRoot;
         this.gameController = gameController;
 
+        System.out.println("Débogage : Stage après affectation : " + this.stage);
         gameController.setStage(primaryStage);
-    }
-
-    public void handleBackToMenu(Stage stage) {
-        try {
-            // Charger la scène du menu (menu.fxml)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-            VBox root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -54,13 +48,30 @@ public class DemineurMenuController {
         startGame(20, 20, 50);
     }
 
+    // Méthode pour démarrer le jeu avec les paramètres spécifiés
     private void startGame(int largeur, int hauteur, int nombreDeMines) {
-        if (gameController != null) {
-            gameController.setGridSize(largeur, hauteur, nombreDeMines);  // Assurez-vous que cette méthode est bien définie
-            Scene gameScene = new Scene(gameRoot, 800, 600);
-            stage.setScene(gameScene);  // Passe à la scène de jeu
-        } else {
-            System.err.println("Erreur : le contrôleur du jeu est null.");
+        if (stage == null) {
+            System.err.println("Erreur : le stage est null !");
+            return;
+        }
+
+        try {
+            FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+            StackPane gameRoot = gameLoader.load();
+
+            DemineurController gameController = gameLoader.getController();
+            if (gameController != null) {
+                gameController.setStage(stage);
+                gameController.setGridSize(largeur, hauteur, nombreDeMines);
+
+                Scene gameScene = new Scene(gameRoot, 800, 600);
+                stage.setScene(gameScene);
+                stage.show();
+            } else {
+                System.err.println("Erreur : le contrôleur du jeu n'a pas été initialisé !");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
